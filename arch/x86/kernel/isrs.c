@@ -606,19 +606,19 @@ void syscall_handler(struct state *s)
 			break;
 #endif
 
-#ifndef DISABLE_SYS_GETDENTS
-		case 78:
-			/* getdents */
-			s->rax = sys_getdents(s->rdi, (void *)s->rsi, s->rdx);
+#ifndef DISABLE_SYS_TRUNCATE
+		case 76:
+			/* truncate */
+			s->rax = sys_truncate((const char*)s->rdi, s->rsi);
 			break;
 #endif
 
-#ifndef DISABLE_SYS_GETCWD
-		case 79:
-			/*getcwd */
-			s->rax = sys_getcwd((char *)s->rdi, s->rsi);
+#ifndef DISABLE_SYS_FTRUNCATE
+		case 77:
+			/*ftruncate */
+			s->rax = sys_ftruncate(s->rdi, s->rsi);
 			break;
-#endif /* DISABLE_SYS_GETCWD */
+#endif
 
 #ifndef DISABLE_SYS_CHDIR
 		case 80:
@@ -627,7 +627,6 @@ void syscall_handler(struct state *s)
 #endif
 		case 82:
 			/* rename */
-
 			s->rax = sys_rename((const char *)s->rdi, (const char *)s->rsi);
 			break;
 
